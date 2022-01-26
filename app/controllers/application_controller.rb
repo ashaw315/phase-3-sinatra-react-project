@@ -10,6 +10,11 @@ class ApplicationController < Sinatra::Base
     User.all.to_json
   end
 
+  get "/listing/:id" do
+    Listing.find(params[:id]).to_json
+  end
+
+
   get "/reviews" do
     Review.all.to_json
   end
