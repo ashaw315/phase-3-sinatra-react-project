@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_24_164926) do
+ActiveRecord::Schema.define(version: 2022_01_26_000744) do
+
+  create_table "applicants", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "listing_id"
+  end
 
   create_table "listings", force: :cascade do |t|
     t.string "job_title"
@@ -20,6 +25,7 @@ ActiveRecord::Schema.define(version: 2022_01_24_164926) do
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "hired"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -35,6 +41,8 @@ ActiveRecord::Schema.define(version: 2022_01_24_164926) do
     t.string "position"
     t.string "user_despcription"
     t.string "skills"
+    t.string "favorite_quote"
+    t.string "favorite_game"
   end
 
 end
