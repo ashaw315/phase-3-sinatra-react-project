@@ -41,12 +41,11 @@ class ApplicationController < Sinatra::Base
     User.all.to_json
   end
 
-  get "/users/:id" do
-    user = User.find(params[:id])
-    user.to_json
+  get "/listing/:id" do
+    Listing.find(params[:id]).to_json
   end
 
-  # Reviews
+
   get "/reviews" do
     Review.all.to_json
   end
