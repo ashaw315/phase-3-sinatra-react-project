@@ -10,8 +10,8 @@ puts "creating users..."
 # user4 = User.create(name: "Jennifer Lopez", password: "12345", position: "Jack-of-all-trades", user_despcription: "I can do and fix anything", skills: "If it exits I know how to do it, leveling")
 # user5 = User.create(name: "Link", password: "zelda", position: "Swordsman", user_despcription: "Great at mowing down grass", skills: "lawn care, hookshot, archery")
 
-10.times {
-    User.create(name: Faker::Name.name, password: Faker::Food.fruits, position: Faker::Job.field, user_despcription: Faker::Job.key_skill)
+15.times {
+    User.create(name: Faker::Name.name, password: Faker::Food.fruits, position: Faker::Job.field, user_despcription: Faker::Job.key_skill, skills: Faker::Hobby.activity, favorite_quote: Faker::Quote.matz, favorite_game:Faker::Game.title)
 }
 
 puts "creating listings..."
@@ -26,8 +26,8 @@ puts "creating listings..."
 # listing8 = Listing.create(job_title: "Toddler Daycare", job_description: "Babysitting", hourly_rate: 50, start_date: "12/24/22", end_date: "12/31/22")
 # listing9 = Listing.create(job_title: "Untitled movie project", job_description: "Starring in blockbuster film", hourly_rate: 27, start_date: "03/15/22", end_date: "04/14/22")
 
-15.times {
-    Listing.create(job_title: Faker::Job.title, job_description: Faker::Job.position, hourly_rate: rand(20..50), start_date: Faker::Date.between(from: '2022-01-23', to: '2022-12-25'))
+20.times {
+    Listing.create(job_title: Faker::Job.title, job_description: Faker::Job.position, hourly_rate: rand(20..50), start_date: Faker::Date.between(from: '2022-01-05', to: '2022-01-17'), end_date: Faker::Date.between(from: '2022-01-17', to: '2022-02-17'), hired: Faker::Boolean.boolean(true_ratio: 0.2))
 }
 
 
@@ -57,5 +57,11 @@ puts "creating reviews..."
 # review18 = Review.create(comment: "This place did not pay on time. Tracking down that check.", rating: 4, user_id: user4.id, listing_id: listing3.id)
 # review19 = Review.create(comment: "Utter trash. Burn it down.", rating: 1, user_id: user1.id, listing_id: listing4.id)
 # review20 = Review.create(comment: "Terribly dissapointing. Wanted to leave the second I walked into roach infested environment.", rating: 2, user_id: user1.id, listing_id: listing8.id)
+
+puts "creating applicants..."
+
+10.times {
+    Applicant.create(user_id: User.all.sample.id, listing_id: Listing.all.sample.id)
+}
 
 puts "✅ Done seeding!"
