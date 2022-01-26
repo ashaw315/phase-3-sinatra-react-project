@@ -9,11 +9,32 @@ class ApplicationController < Sinatra::Base
 
   get "/listings/:id" do
     listing = Listing.find(params[:id])
+    puts listing
     listing.to_json(include: { reviews: {only: [:comment, :rating], include: {
        user: { only: [:name, :password, :position, :user_despcription, :skills] }
        } }
-    })
+    } )
   end
+
+  post '/listings' do 
+    listing = Listing.create(job_title: params[:job_title], job_description: params[:job_description], hourly_rate: params[:hourly_rate], start_date: params[:start_date], end_date: params[:end_date], hired: params[:hired])
+    listing.to_json
+  end
+
+  delete '/listings/:id' do
+    listing = Listing.find(params[:id])
+    listing.destroy
+    {message: "Listing Deleted"}.to_json
+  end
+  # patch '/listing/:id' do
+  #   listing = Listing.find(params[:id])
+  #   listing.update()
+
+
+  # get 'Listin/:id' do
+  #   applicants = Applicant.find(params[:id])
+  #   applicants.to_json
+  # end
 
   # Users
   get "/users" do

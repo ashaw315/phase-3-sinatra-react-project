@@ -64,4 +64,10 @@ puts "creating applicants..."
     Applicant.create(user_id: User.all.sample.id, listing_id: Listing.all.sample.id)
 }
 
+puts "creating applicants..."
+
+20.times {
+    Candidate.create(user_id: User.all.sample.id, buzzword: Faker::Company.buzzword)
+}
+
 puts "✅ Done seeding!"
