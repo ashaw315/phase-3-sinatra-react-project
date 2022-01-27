@@ -10,12 +10,16 @@ class ApplicationController < Sinatra::Base
   get "/listings/:id" do
     listing = Listing.find(params[:id])
     puts listing
-    listing.to_json(include: { reviews: {only: [:comment, :rating], include: {
-       user: { only: [:name, :password, :position, :user_despcription, :skills] }
-       } },
-       applicants: { include: {user: { only: [:name, :password, :position, :user_despcription, :skills] }} }
-    } )
+    listing.to_json(include: { 
+      reviews: {only: [:comment, :rating], include: { user: { only: [:name, :password, :position, :user_despcription, :skills] }}},
+      applicants: { include: {user: { only: [:name, :password, :position, :user_despcription, :skills] }} }
+    })
   end
+
+  # get "/listings/applicants/:id" do
+  #   applicants = Applicant.find(params[:id])
+  #   applicants.to_json
+  # end
 
   post '/listings' do 
     listing = Listing.create(job_title: params[:job_title], job_description: params[:job_description], hourly_rate: params[:hourly_rate], start_date: params[:start_date], end_date: params[:end_date], hired: params[:hired])
@@ -28,14 +32,11 @@ class ApplicationController < Sinatra::Base
     {message: "Listing Deleted"}.to_json
   end
 
-  # commented out on mine, but not on Adam's
-
-  # patch '/listing/:id' do
-  #   listing = Listing.find(params[:id])
-  #   listing.update(job_title: params[:job_title], job_description: params[:job_description], hourly_rate: params[:hourly_rate], start_date: params[:start_date], end_date: params[:end_date], hired: params[:hired])
-  # listing.to_json
-# end
-
+  patch '/listings/:id' do
+    listing = Listing.find(params[:id])
+    listing.update(job_title: params[:job_title], job_description: params[:job_description], hourly_rate: params[:hourly_rate], start_date: params[:start_date], end_date: params[:end_date], hired: params[:hired]).to_json
+    # listing.to_json
+  end
 
   # get 'Listin/:id' do
   #   applicants = Applicant.find(params[:id])
@@ -61,6 +62,7 @@ class ApplicationController < Sinatra::Base
     applicant = Applicant.create(user_id: user[:id], listing_id: listing[:id])
   end
 
+  # @user.listings << Listing.find(params[:id])
 
   get "/listing/:id" do
     Listing.find(params[:id]).to_json
