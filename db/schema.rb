@@ -52,3 +52,8 @@ ActiveRecord::Schema.define(version: 2022_01_26_012620) do
   end
 
 end
+
+post '/users' do 
+  user = User.create(name: params[:name], password: params[:password], position: params[:position], user_despcription: params[:user_despcription], skills: params[:skills], favorite_quote: params[:favorite_quote], favorite_game: params[:favorite_game])
+  user.to_json({include: :listings})
+end
