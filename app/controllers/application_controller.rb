@@ -58,8 +58,9 @@ class ApplicationController < Sinatra::Base
 
   post '/users' do 
     user = User.create(name: params[:name], password: params[:password], position: params[:position], user_despcription: params[:user_despcription], skills: params[:skills], favorite_quote: params[:favorite_quote], favorite_game: params[:favorite_game])
+    listing = Listing.find(params[:listing])
     user.to_json({include: :listings})
-    applicant = Applicant.create(user_id: user[:id], listing_id: listing[:id])
+    applicant = Applicant.create(user_id: user.id, listing_id: listing.id)
   end
 
   # @user.listings << Listing.find(params[:id])
