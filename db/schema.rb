@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_26_012620) do
+ActiveRecord::Schema.define(version: 2022_01_27_210417) do
 
   create_table "applicants", force: :cascade do |t|
     t.integer "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_012620) do
     t.integer "rating"
     t.integer "user_id"
     t.integer "listing_id"
+    t.string "review_name"
   end
 
   create_table "users", force: :cascade do |t|
@@ -51,9 +52,4 @@ ActiveRecord::Schema.define(version: 2022_01_26_012620) do
     t.string "favorite_game"
   end
 
-end
-
-post '/users' do 
-  user = User.create(name: params[:name], password: params[:password], position: params[:position], user_despcription: params[:user_despcription], skills: params[:skills], favorite_quote: params[:favorite_quote], favorite_game: params[:favorite_game])
-  user.to_json({include: :listings})
 end
