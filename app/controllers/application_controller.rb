@@ -80,13 +80,13 @@ class ApplicationController < Sinatra::Base
     review.to_json
   end
 
-  # post "/reviews" do 
-  #   # listing = Listing.find(params[:id])
-  #   review = Review.create(comment: params[:comment], rating: params[:rating], user_id: params[:user_id], listing_id: params[:id], review_name: params[:review_name])
-  #   review.to_json[include: :state]
-  #   # listing.to_json()
+  post "/reviews" do 
+    # listing = Listing.find(params[:id])
+    review = Review.create(comment: params[:comment], rating: params[:rating], user_id: params[:user_id], listing_id: params[:id], review_name: params[:review_name])
+    review.to_json[include: :state]
+    # listing.to_json()
 
-  # end
+  end
 
 
 
