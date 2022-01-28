@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
     puts listing
     listing.to_json(include: { 
       reviews: {only: [:comment, :rating], include: { user: { only: [:name, :password, :position, :user_despcription, :skills] }}},
-      applicants: { include: {user: { only: [:name, :password, :position, :user_despcription, :skills] }} }
+      applicants: { include: {user: { only: [:name, :password, :position, :user_despcription, :skills, :favorite_game, :favorite_quote] }} }
     })
   end
 
