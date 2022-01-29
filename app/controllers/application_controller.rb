@@ -81,9 +81,10 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/reviews" do 
-    # listing = Listing.find(params[:id])
-    review = Review.create(comment: params[:comment], rating: params[:rating], user_id: params[:user_id], listing_id: params[:id], review_name: params[:review_name])
-    review.to_json[include: :state]
+    listing = Listing.find(params[:listing])
+    review = Review.create(comment: params[:comment], rating: params[:rating], listing_id: listing.id, review_name: params[:review_name])
+    # listing = Listing.find(params[:listing])
+    review.to_json
     # listing.to_json()
 
   end
